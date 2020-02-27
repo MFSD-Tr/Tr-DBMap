@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CompanyDBMappingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressId" />
+    </Key>
+    <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressType" Type="smallint" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="200" />
+    <Property Name="Address2" Type="nvarchar" MaxLength="200" />
+    <Property Name="City" Type="nvarchar" MaxLength="100" />
+    <Property Name="FkStateId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Company" Type="nvarchar" MaxLength="300" />
+    <Property Name="CompanyCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="RecordStatus" Type="smallint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CompanyAddress">
+    <Key>
+      <PropertyRef Name="CompanyAddressId" />
+    </Key>
+    <Property Name="CompanyAddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FkCompanyId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="FkAddressId" Type="int" />
+  </EntityType>
+  <EntityType Name="CompanyDB">
+    <Key>
+      <PropertyRef Name="CompanyDBId" />
+    </Key>
+    <Property Name="CompanyDBId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FkCompanyId" Type="int" />
+    <Property Name="FkDatabaseInfoId" Type="int" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="RecordStatus" Type="smallint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Country" Type="nvarchar" MaxLength="100" />
+    <Property Name="CountryCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="RecordStatus" Type="smallint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DatabaseInfo">
+    <Key>
+      <PropertyRef Name="DatabaseInfoId" />
+    </Key>
+    <Property Name="DatabaseInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ServerName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Authentication" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="RecordStatus" Type="smallint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="RecordStatus" Type="smallint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="datetime" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="State" Type="nvarchar" MaxLength="100" />
+    <Property Name="StateCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="RecordStatus" Type="smallint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="datetime" />
+    <Property Name="FkCountryId" Type="smallint" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="HireDate" Type="datetime" />
+    <Property Name="ReleaseDate" Type="datetime" />
+    <Property Name="FkRoleId" Type="smallint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="RecordStatus" Type="smallint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserAddress">
+    <Key>
+      <PropertyRef Name="UserAddressId" />
+    </Key>
+    <Property Name="UserAddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FkUserId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="FkAddressId" Type="int" />
+  </EntityType>
+  <EntityType Name="UserHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FkRoleId" Type="smallint" />
+    <Property Name="Version" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="Action" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Address_State">
+    <End Role="State" Type="Self.State" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="FkStateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyAddress_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="CompanyAddress" Type="Self.CompanyAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="CompanyAddress">
+        <PropertyRef Name="FkAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyAddress_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="CompanyAddress" Type="Self.CompanyAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="CompanyAddress">
+        <PropertyRef Name="FkCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyDB_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="CompanyDB" Type="Self.CompanyDB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="CompanyDB">
+        <PropertyRef Name="FkCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyDB_DatabaseInfo">
+    <End Role="DatabaseInfo" Type="Self.DatabaseInfo" Multiplicity="0..1" />
+    <End Role="CompanyDB" Type="Self.CompanyDB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DatabaseInfo">
+        <PropertyRef Name="DatabaseInfoId" />
+      </Principal>
+      <Dependent Role="CompanyDB">
+        <PropertyRef Name="FkDatabaseInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_State_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="State" Type="Self.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="FkCountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="FkRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAddress_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="UserAddress">
+        <PropertyRef Name="FkAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAddress_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserAddress">
+        <PropertyRef Name="FkUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserHistory_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="UserHistory" Type="Self.UserHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserHistory">
+        <PropertyRef Name="FkRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CompanyDBMappingModelStoreContainer">
+    <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyAddress" EntityType="Self.CompanyAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyDB" EntityType="Self.CompanyDB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DatabaseInfo" EntityType="Self.DatabaseInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAddress" EntityType="Self.UserAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserHistory" EntityType="Self.UserHistory" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Address_State" Association="Self.FK_Address_State">
+      <End Role="State" EntitySet="State" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyAddress_Address" Association="Self.FK_CompanyAddress_Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="CompanyAddress" EntitySet="CompanyAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyAddress_Company" Association="Self.FK_CompanyAddress_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="CompanyAddress" EntitySet="CompanyAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyDB_Company" Association="Self.FK_CompanyDB_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="CompanyDB" EntitySet="CompanyDB" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyDB_DatabaseInfo" Association="Self.FK_CompanyDB_DatabaseInfo">
+      <End Role="DatabaseInfo" EntitySet="DatabaseInfo" />
+      <End Role="CompanyDB" EntitySet="CompanyDB" />
+    </AssociationSet>
+    <AssociationSet Name="FK_State_Country" Association="Self.FK_State_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="State" EntitySet="State" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAddress_Address" Association="Self.FK_UserAddress_Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="UserAddress" EntitySet="UserAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAddress_User" Association="Self.FK_UserAddress_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserAddress" EntitySet="UserAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserHistory_Role" Association="Self.FK_UserHistory_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserHistory" EntitySet="UserHistory" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

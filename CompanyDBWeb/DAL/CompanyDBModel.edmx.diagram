@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c88fe2b9ed3548b190a1d0ab39bc8f23" Name="Diagram1">
+        <EntityTypeShape EntityType="CompanyDBMappingModel.Address" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.Company" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.CompanyAddress" Width="1.5" PointX="7.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.CompanyDB" Width="1.5" PointX="7.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.Country" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.DatabaseInfo" Width="1.5" PointX="5.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.Role" Width="1.5" PointX="6" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.State" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.User" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.UserAddress" Width="1.5" PointX="10.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.UserHistory" Width="1.5" PointX="8.25" PointY="16.625" IsExpanded="true" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_Address_State" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_CompanyAddress_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_UserAddress_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_CompanyAddress_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_CompanyDB_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_CompanyDB_DatabaseInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_State_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_UserHistory_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_UserAddress_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CompanyDBMappingModel.Login" Width="1.5" PointX="10.5" PointY="12.5" />
+        <AssociationConnector Association="CompanyDBMappingModel.FK_Login_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

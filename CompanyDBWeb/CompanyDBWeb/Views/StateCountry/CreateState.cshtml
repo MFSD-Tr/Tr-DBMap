@@ -1,0 +1,54 @@
+﻿@model CompanyDBWeb.Models.StateCountryModel
+@{
+    ViewBag.Title = "CreateState";
+}
+
+<!--#region "Data Entry Form"-->
+<div style="height:400px; margin-bottom:20px">
+    @using (Html.BeginForm("CreateState", "StateCountry", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div style="width: 1000px; height: 300px; margin-top: 50px;font-size: 16px">
+            <div class="row">
+                <div class="col-md-1">
+                    <label><strong>State</strong></label>
+                </div>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(a => a.stateDTO.State1, new { @class = "form-control mb-4" })
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-1">
+                    <label><strong>StateCode</strong></label>
+                </div>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(a => a.stateDTO.StateCode, new { @class = "form-control mb-4" })
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-1">
+                    <label><strong>Country</strong></label>
+                </div>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(a => a.stateDTO.FkCountryId, new SelectList(Model.countryList, "CountryId", "Country1"), "--Select--", new { @class = "form-control mb-4" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </div>
+            
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-6">
+            <a class="btn btn-success" href="@Url.Action("CreateCountry","StateCountry")">Country</a>
+        </div>
+    </div>
+</div>
+<!--#endregion-->
+
+

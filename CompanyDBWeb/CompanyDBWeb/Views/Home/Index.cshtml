@@ -1,0 +1,40 @@
+﻿@model CompanyDBWeb.Models.LoginDataModel
+@{
+    ViewBag.Title = "SignIn";
+}
+
+@using (Html.BeginForm("CheckLogin", "Home", FormMethod.Post))
+{
+    <div class="container border border-light p-5" style="width:480px; margin-top:40px; margin-bottom:200px;">
+        <!--Sign in-->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center mb-4 h3">Sign In</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-left">
+                <label style="font-weight:500">Username</label>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                @Html.TextBoxFor(a => a.loginDTO.Username, new { @class = "form-control mb-4", @required = true })
+            </div>
+            <div class="col-md-12 col-sm-12 text-left">
+                <label style="font-weight:500">Password</label>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                @Html.TextBoxFor(a => a.loginDTO.Password, new { @class = "form-control mb-4", @type = "password", @required = true })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-left">
+                <input type="submit" class="btn btn-success my-4" value="Sign In">
+            </div>                                                  
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-right">
+                <p style="font-weight:500">Don't Have Account ? <a href="@Url.Action("SignUp","Home")">Register</a></p>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,140 @@
+﻿@model CompanyDBWeb.Models.UserDataModel
+
+@{
+    ViewBag.Title = "SignUp";
+}
+
+@using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
+{
+    <div class="container border border-light p-5" style="width:540px; margin-top:40px; margin-bottom:200px;">
+        <!--Sign Up-->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center mb-4 h3">Sign Up</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-4 text-left">
+                <label style="font-weight:500">First Name</label>
+            </div>
+            <div class="col-md-4 col-sm-4 text-left">
+                <label style="font-weight:500">Middle Name</label>
+            </div>
+            <div class="col-md-4 col-sm-4 text-left">
+                <label style="font-weight:500">Last Name</label>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                @Html.TextBoxFor(a => a.useraddressDTO.User.FirstName, new { @class = "form-control mb-4", @required = true })
+            </div>
+            <div class="col-md-4 col-sm-4">
+                @Html.TextBoxFor(a => a.useraddressDTO.User.MiddleName, new { @class = "form-control mb-4", @required = true })
+            </div>
+            <div class="col-md-4 col-sm-4">
+                @Html.TextBoxFor(a => a.useraddressDTO.User.LastName, new { @class = "form-control mb-4", @required = true })
+            </div>
+            <div class="col-md-6 col-sm-6 text-left">
+                <label style="font-weight:500">Username</label>
+            </div>
+            <div class="col-md-6 col-sm-6 text-left">
+                <label style="font-weight:500">Password</label>
+                </div>
+            <div class="col-md-6 col-sm-6">
+                @Html.TextBoxFor(a => a.loginDTO.Username, new { @class = "form-control mb-4", @required = true })
+            </div>
+            <div class="col-md-6 col-sm-6">
+                @Html.TextBoxFor(a => a.loginDTO.Password, new { @class = "form-control mb-4", @required = true })
+            </div>
+                <div class="col-md-4 col-sm-4 text-left">
+                    <label style="font-weight:500">DoB</label>
+                </div>
+                <div class="col-md-4 col-sm-4 text-left">
+                    <label style="font-weight:500">Hire Date</label>
+                </div>
+                <div class="col-md-4 col-sm-4 text-left">
+                    <label style="font-weight:500">Release Date</label>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    @Html.TextBoxFor(a => a.useraddressDTO.User.DOB, new { @class = "form-control mb-4", @type = "date", @required = true })
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    @Html.TextBoxFor(a => a.useraddressDTO.User.HireDate, new { @class = "form-control mb-4", @type = "date", @required = true })
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    @Html.TextBoxFor(a => a.useraddressDTO.User.ReleaseDate, new { @class = "form-control mb-4", @type = "date", @required = true })
+                </div>
+
+                <div class="col-md-4 col-sm-4 text-left">
+                    <label style="font-weight:500">Apartment</label>
+                </div>
+                <div class="col-md-4 col-sm-4 text-left">
+                    <label style="font-weight:500">Street</label>
+                </div>
+                <div class="col-md-4 col-sm-4 text-left">
+                    <label style="font-weight:500">City</label>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    @Html.TextBoxFor(a => a.useraddressDTO.Address.Address1, new { @class = "form-control mb-4", @required = true })
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    @Html.TextBoxFor(a => a.useraddressDTO.Address.Address2, new { @class = "form-control mb-4", @required = true })
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    @Html.TextBoxFor(a => a.useraddressDTO.Address.City, new { @class = "form-control mb-4", @required = true })
+                </div>
+                <div class="col-md-6 col-sm-6 text-left">
+                    <label style="font-weight:500">Country</label>
+                </div>
+                <div class="col-md-6 col-sm-6 text-left">
+                    <label style="font-weight:500">State</label>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    @Html.DropDownListFor(a => a.useraddressDTO.Address.State.FkCountryId, new SelectList(Model.countryList, "CountryId", "Country1"), "--Country--", new { @class = "form-control mb-4", @id = "Country" })
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    @Html.DropDownListFor(a => a.useraddressDTO.Address.FkStateId, new SelectList(Model.stateList, "StateId", "State1"), "--State--", new { @class = "form-control mb-4", @id = "State" })
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-left">
+                <input type="submit" class="btn btn-success my-4" value="Sign Up">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-right">
+                <p style="font-weight:500">Already have account? <a href="@Url.Action("Index","Home")">SignIn</a></p>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+    $("#Country").change(function () {
+        var CountryId = $("#Country").val();
+        if (CountryId == null) {
+            alert("Please select country");
+            return;
+        }
+        $.ajax({
+            url: "/Home/StateListByCountryId",
+            type: "Post",
+            data: { id: CountryId },
+            //contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                console.log(result.stateList);
+                var listItems = "";
+                var a = result.stateList;
+                $.each(result.stateList, function (index, data) {
+                    listItems += "<option value='" + data.StateId + "'>" + data.State1 + "</option>"
+                });
+                console.log(listItems);
+                $("#State").html(listItems);
+            },
+            error: function () {
+                alert("An error has occured!!!");
+            }
+
+        })
+    })
+</script>

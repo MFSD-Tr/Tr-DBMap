@@ -1,0 +1,47 @@
+﻿@model CompanyDBWeb.Models.StateCountryModel
+@{
+    ViewBag.Title = "CreateCountry";
+}
+
+<!--#region "Data Entry Form"-->
+<div style="height:400px; margin-bottom:20px">
+    @using (Html.BeginForm("CreateCountry", "StateCountry", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div style="width: 1000px; height: 150px; margin-top: 50px;font-size: 16px">
+            <div class="row">
+                <div class="col-md-1">
+                    <label><strong>Country</strong></label>
+                </div>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(a => a.countryDTO.Country1, new { @class = "form-control mb-4" })
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <label><strong>CountryCode</strong></label>
+                </div>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(a => a.countryDTO.CountryCode, new { @class = "form-control mb-4" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-6">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </div>
+            
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-6">
+            <a class="btn btn-success" href="@Url.Action("CreateState","StateCountry")">State</a>
+        </div>
+    </div>
+</div>
+<!--#endregion-->
+
+
