@@ -19,6 +19,8 @@ namespace CompanyDBWeb.Controllers
         CompanyDBMapBL CompanyDBMapBLobject = new CompanyDBMapBL();
         UserBL UserBLobject = new UserBL();
         LoginBL LoginBLobject = new LoginBL();
+        RoleBL RoleBLobject = new RoleBL();
+        StateCountryBL StateCountryBLobject = new StateCountryBL();
         #endregion
 
 
@@ -67,7 +69,7 @@ namespace CompanyDBWeb.Controllers
         {
             try
             {
-                List<CountryDTO> countryList = CompanyBLobject.CountryList();
+                List<CountryDTO> countryList = StateCountryBLobject.CountryList();
                 if (countryList.Count() > 0)
                     return Ok(countryList);
                 else
@@ -89,7 +91,7 @@ namespace CompanyDBWeb.Controllers
         {
             try
             {
-                List<StateDTO> stateList = CompanyBLobject.StateList();
+                List<StateDTO> stateList = StateCountryBLobject.StateList();
                 if (stateList.Count() > 0)
                     return Ok(stateList);
                 else
@@ -112,7 +114,7 @@ namespace CompanyDBWeb.Controllers
         {
             try
             {
-                List<StateDTO> stateList = CompanyBLobject.StateListByCountryId(CountryId);
+                List<StateDTO> stateList = StateCountryBLobject.StateListByCountryId(CountryId);
                 if (stateList.Count() > 0)
                     return Ok(stateList);
                 else
@@ -201,7 +203,7 @@ namespace CompanyDBWeb.Controllers
         {
             try
             {
-                List<CompanyDTO> companyList = CompanyDBMapBLobject.GetCompanyList();
+                List<CompanyDTO> companyList = CompanyBLobject.GetActiveCompanyList();
                 if (companyList.Count() > 0)
                     return Ok(companyList);
                 else
@@ -245,7 +247,7 @@ namespace CompanyDBWeb.Controllers
         {
             try
             {
-                List<RoleDTO> roleList = UserBLobject.GetAllRole();
+                List<RoleDTO> roleList = RoleBLobject.GetAllRole();
                 if (roleList.Count() > 0)
                     return Ok(roleList);
                 else

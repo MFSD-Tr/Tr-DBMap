@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{376BB226-8E6F-4BE3-8F4A-3806F49AF978}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyDBMapAPI", "CompanyDBMapAPI\CompanyDBMapAPI.csproj", "{895D38CF-753C-4F1D-921D-EA91A1638021}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{376BB226-8E6F-4BE3-8F4A-3806F49AF978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{376BB226-8E6F-4BE3-8F4A-3806F49AF978}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{376BB226-8E6F-4BE3-8F4A-3806F49AF978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{895D38CF-753C-4F1D-921D-EA91A1638021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{895D38CF-753C-4F1D-921D-EA91A1638021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{895D38CF-753C-4F1D-921D-EA91A1638021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{895D38CF-753C-4F1D-921D-EA91A1638021}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

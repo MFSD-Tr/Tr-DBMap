@@ -33,7 +33,7 @@ namespace CompanyDBWeb.Controllers
         public ActionResult CreateState()
         {
             StateCountryModel model = new StateCountryModel();
-            model.countryList = companyBLobject.CountryList();
+            model.countryList = obj.CountryList();
             return View(model);
         }
 

@@ -12,9 +12,7 @@ namespace BLL
 {
     public class LoginBL
     {
-        #region "Variable Declaration"
-        public UnitOfWork uow = new UnitOfWork();
-        #endregion
+        
 
         #region "Public Methods"
         /// <summary>
@@ -29,8 +27,11 @@ namespace BLL
             int UserId = -1;
             try
             {
-                Login loginObj = uow.LoginRepo.GetAll().Where(a => a.Username == LoginDTOobject.Username && a.Password == LoginDTOobject.Password).FirstOrDefault();
-                UserId=Convert.ToInt32(loginObj.FkUserId);
+                using (UnitOfWork uow = new UnitOfWork())
+                {
+                    Login loginObj = uow.LoginRepo.GetAll().Where(a => a.Username == LoginDTOobject.Username && a.Password == LoginDTOobject.Password).FirstOrDefault();
+                    UserId = Convert.ToInt32(loginObj.FkUserId);
+                }
             }
             catch(Exception e)
             {

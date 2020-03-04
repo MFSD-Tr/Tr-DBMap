@@ -9,7 +9,6 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using CompanyDBWeb.Models;
-using CompanyDBWeb.Controllers;
 using DTOs;
 
 namespace CompanyDBWeb.Controllers
