@@ -1,0 +1,206 @@
+﻿@model CompanyDBWeb.Models.CompanyDBDataModel
+@{
+    ViewBag.Title = "CompanyDBInfoById";
+}
+
+<!--#region "NavBar"-->
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:white ">
+    <a class="navbar-brand" href="@Url.Action("HomePage","Home")" style="font-weight:700;">Home</a>
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("CompanyDetailList","Home")">Company</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="@Url.Action("CompanyDBList","Home")">DB Data</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("UserList","Home")">Users</a>
+            </li>
+        </ul>
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle nav-item" id="navbarDropdownMenuLink" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false" style="color:black">
+                @Session["UserName"] (Admin)<img src="~/Home/RetrieveUserProfileImage/@Session["AdminId"]" alt="NO-DATA" style="border-radius:50%; height:30px; width:30px" />
+                <img class="profile-img img-rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQFGxEA_sP1TrD6MGIDHAza-VAP1qYdB46ERfTxnd7vTJ9ey0Us" style="width:30px; height:30px;" />
+            </a>
+            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="@Url.Action("Index","Home")" style="font-weight:500; padding:0 10px 0 20px">Logout</a>
+            </div>
+        </div>
+        <!-- Links -->
+    </div>
+    <!-- Collapsible content -->
+</nav>
+<!--/.Navbar-->
+<!--#endregion-->
+
+
+<!--#region "Card"-->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card" style="margin:40px auto; width:600px;">
+                <div class="row">
+                    <div class="col-md-12 card-body" style="margin-left:80px">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6"><label style="font-weight:700">Company</label></div>
+                            <div class="col-md-6 col-sm-6">@Html.DisplayFor(a => a.companydbDTO.Company.Company1)</div>
+                        
+                            <div class="col-md-6 col-sm-6"><label style="font-weight:700">Server</label></div>
+                            <div class="col-md-6 col-sm-6">@Html.DisplayFor(a => a.companydbDTO.DatabaseInfo.ServerName)</div>
+                        
+                            <div class="col-md-6 col-sm-6"><label style="font-weight:700">Authentication</label></div>
+                            <div class="col-md-6 col-sm-6">@Html.DisplayFor(a => a.companydbDTO.DatabaseInfo.Authentication)</div>
+                        
+                            <div class="col-md-6 col-sm-6"><label style="font-weight:700">Username</label></div>
+                            <div class="col-md-6 col-sm-6">@Html.DisplayFor(a => a.companydbDTO.DatabaseInfo.UserName)</div>
+                        
+                            <div class="col-md-6 col-sm-6"><label style="font-weight:700">Password</label></div>
+                            <div class="col-md-6 col-sm-6">@Html.DisplayFor(a => a.companydbDTO.DatabaseInfo.Password)</div>
+                        </div>
+                        <div class="row justify-content-end" style="margin-top:20px">
+                            <div class="col-md-4 col-sm-4"><a class="btn btn-primary" href="@Url.Action("CompanyDBList","Home")">&#8592;Back</a></div>
+                            <div class="col-md-4 col-sm-4"><button id="btnUpdateModal" type="button" class="btn btn-warning">Edit</button></div>
+                            <div class="col-md-4 col-sm-4"><button id="btnDeleteModal" type="button" class="btn btn-danger">Delete</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--#endregion-->
+                        
+
+<!--#region "Update Modal"-->
+<!--Update Modal Form-->
+@using (@Html.BeginForm("UpdateCompanyDBInfo", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.companydbDTO.CompanyDBId)
+    @Html.HiddenFor(a => a.companydbDTO.FkCompanyId)
+    @Html.HiddenFor(a=>a.companydbDTO.FkDatabaseInfoId)
+    @*@Html.HiddenFor(a => a.companydbDTO.Active)
+    @Html.HiddenFor(a => a.companydbDTO.CreatedBy)
+    @Html.HiddenFor(a => a.companydbDTO.CreatedDate)
+    @Html.HiddenFor(a => a.companydbDTO.RecordStatus)*@
+
+
+    @Html.HiddenFor(a => a.companydbDTO.DatabaseInfo.DatabaseInfoId)
+    @Html.HiddenFor(a => a.companydbDTO.DatabaseInfo.Active)
+    @Html.HiddenFor(a => a.companydbDTO.DatabaseInfo.CreatedBy)
+    @Html.HiddenFor(a => a.companydbDTO.DatabaseInfo.CreatedDate)
+    @Html.HiddenFor(a => a.companydbDTO.DatabaseInfo.RecordStatus)
+
+
+
+
+    <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLongTitle" style="font-weight:800">UPDATE</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4"><label style="font-weight:700">Server</label></div>
+                        <div class="col-md-8 col-sm-8">@Html.TextBoxFor(a => a.companydbDTO.DatabaseInfo.ServerName, new { @class = "form-control mb-4", @required = true })</div>
+                        
+                        <div class="col-md-4 col-sm-4"><label style="font-weight:700">Authentication</label></div>
+                        <div class="col-md-8 col-sm-8">@Html.TextBoxFor(a => a.companydbDTO.DatabaseInfo.Authentication, new { @class = "form-control mb-4", @required = true })</div>
+                    
+                        <div class="col-md-4 col-sm-4"><label style="font-weight:700">Username</label></div>
+                        <div class="col-md-8 col-sm-8">@Html.TextBoxFor(a => a.companydbDTO.DatabaseInfo.UserName, new { @class = "form-control mb-4", @required = true })</div>
+                    
+                        <div class="col-md-4 col-sm-4"><label style="font-weight:700">Password</label></div>
+                        <div class="col-md-8 col-sm-8">@Html.TextBoxFor(a => a.companydbDTO.DatabaseInfo.Password, new { @class = "form-control mb-4", @required = true })</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnHideUpdateModal">Close</button>
+                    <input type="submit" class="btn btn-warning" value="Update" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--#endregion-->
+
+<!--#region "Delete Modal"-->
+@using (@Html.BeginForm("DeleteCompanyDB", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.companydbDTO.CompanyDBId)
+    @Html.HiddenFor(a => a.companydbDTO.FkCompanyId)
+    @Html.HiddenFor(a => a.companydbDTO.FkDatabaseInfoId)
+    @Html.HiddenFor(a => a.companydbDTO.CreatedBy)
+    @Html.HiddenFor(a => a.companydbDTO.CreatedDate)
+    @Html.HiddenFor(a => a.companydbDTO.RecordStatus)
+
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLongTitle" style="font-weight:800">Delete !</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12"><label style="font-weight:700; font-size:large">Do you really want to delete "@Html.DisplayFor(a => a.companydbDTO.DatabaseInfo.ServerName)" data from records..?</label></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnHideDeleteModal">No</button>
+                    <input type="submit" class="btn btn-danger" value="Yes" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--#endregion-->
+
+<!--#region "Script"-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnUpdateModal").click(function () {
+            $("#UpdateModal").modal('show');
+        });
+        $("#btnHideUpdateModal").click(function () {
+            $("UpdateModal").modal('hide');
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    var result;
+    $(document).ready(function () {
+        $("#btnDeleteModal").click(function () {
+            $("#DeleteModal").modal('show');
+        });
+        $("#btnHideDeleteModal").click(function () {
+            $("DeleteModal").modal('hide');
+        });
+    })
+
+</script>
+<!--#endregion-->
+

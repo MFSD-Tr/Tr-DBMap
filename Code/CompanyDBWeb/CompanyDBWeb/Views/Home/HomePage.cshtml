@@ -1,0 +1,416 @@
+﻿@model CompanyDBWeb.Models.HomePageDataModel
+@{
+    ViewBag.Title = "HomePage";
+}
+
+<!--#region "CSS"-->
+<style>
+    .table table-hover{
+        overflow-y:scroll;
+    }
+    .table thead tr th{
+        font-weight:700;
+    }
+</style>
+<!--#endregion-->
+
+<!--#region "NavBar"-->
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:white ">
+    <a class="navbar-brand active" href="@Url.Action("HomePage","Home")" style="font-weight:700;">Home</a>
+    @if (Session["AdminId"] != null && Session["UserId"] == null)
+    {
+    <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="@Url.Action("CompanyDetailList","Home")">Company</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("CompanyDBList","Home")">DB Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("UserList","Home")">Users</a>
+                </li>
+            </ul>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav-item" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" style="color:black">
+                    @Session["UserName"] (Admin)<img src="~/Home/RetrieveUserProfileImage/@Session["AdminId"]" alt="NO-DATA" style="border-radius:50%; height:30px; width:30px" />
+                </a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="@Url.Action("Index","Home")" style="font-weight:500; padding:0 10px 0 20px">Logout</a>
+                </div>
+            </div>
+            <!-- Links -->
+        </div>
+    <!-- Collapsible content -->
+    }
+
+    else if (Session["AdminId"] == null && Session["UserId"] != null)
+    {
+    <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("CompanyDetailList","Home")">Company</a>
+                </li>
+            </ul>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    @Session["UserName"] (User)<img src="~/Home/RetrieveUserProfileImage/@Session["UserId"]" alt="No-Data" style="border-radius:50%; height:30px; width:30px;" )" />
+                </a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="@Url.Action("Index","Home")" style="font-weight:500; padding:0 10px 0 20px">Logout</a>
+                </div>
+            </div>
+            <!-- Links -->
+        </div>
+    <!-- Collapsible content -->
+    }
+
+    else if (Session["AdminId"] == null && Session["UserId"] == null)
+    {
+    <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto"></ul>
+            <div class="nav-item">
+                <a class="nav-link" href="@Url.Action("SignUp","Home")" style="color:black">Register</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Home")" style="color:black">Login</a>
+            </div>
+            <!-- Links -->
+        </div>
+    <!-- Collapsible content -->
+    }
+</nav>
+<!--/.Navbar-->
+<!--#endregion-->    
+
+<!--#region "HomePage"-->
+
+<!--#region "Cards"-->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="card col-md-3 col-sm-6" style="margin:40px auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <div class="row">
+                        <div class="card-body col-md-12 col-sm-12 " style="background-color:#003152;color:white">
+                            <div class="row" style="margin-left:5%;">
+                                <div class="col-md-4 col-sm-4 text-left">
+                                    <p>
+                                        <h4 style="font-weight:700;font-size:32px">
+                                            <label>
+                                                <i class="far fa-building"></i>
+                                            </label>
+                                        </h4>
+                                    </p>
+                                </div>
+                                <div class="col-md-8 col-sm-8 text-left">
+                                    <p>
+                                        <h4 style="font-weight:700;font-size:32px">
+                                            <label>
+                                                @Html.DisplayFor(a => a.companyaddressList.Count)
+                                            </label>
+                                        </h4>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card col-md-3 col-sm-6" style="margin:40px auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <div class="row">
+                        <div class="card-body col-md-12 col-sm-12 " style="background-color:#008081;color:white">
+                            <div class="row" style="margin-left:5%;">
+                                <div class="col-md-4 col-sm-4 text-left">
+                                    <p>
+                                        <h4 style="font-weight:700;font-size:32px">
+                                            <label>
+                                                <i class="fas fa-database"></i>
+                                            </label>
+                                        </h4>
+                                    </p>
+                                </div>
+                                <div class="col-md-8 col-sm-8 text-left">
+                                    <p>
+                                        <h4 style="font-weight:700;font-size:32px">
+                                            <label>
+                                                @Html.DisplayFor(a => a.companydbList.Count)
+                                            </label>
+                                        </h4>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card col-md-3 col-sm-6" style="margin:40px auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <div class="row">
+                        <div class="card-body col-md-12 col-sm-12 " style="background-color:#4C516D;color:white">
+                            <div class="row" style="margin-left:5%;">
+                                <div class="col-md-4 col-sm-4 text-left">
+                                    <p>
+                                        <h4 style="font-weight:700;font-size:32px">
+                                            <label>
+                                                <i class="fas fa-user-alt"></i>
+                                            </label>
+                                        </h4>
+                                    </p>
+                                </div>
+                                <div class="col-md-8 col-sm-8 text-left">
+                                    <p>
+                                        <h4 style="font-weight:700;font-size:32px">
+                                            <label>
+                                                @Html.DisplayFor(a => a.useraddressList.Count)
+                                            </label>
+                                        </h4>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--#endregion-->
+
+<!--#region "Dropdown Bars"-->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <!-- #region "Company Dropdown" -->
+                <a class="col-md-12 col-sm-12 btn text-left" id="CompanyDrop" type="button" style="background-color:#003152;font-size:16px;font-weight:400;margin-top:20px;">
+                    <i class="far fa-building"></i> Company ☰
+                </a>
+                <div class="col col-md-12 col-sm-12" id="CompanyDropMenu" style="display:none; margin-left:10px;">
+                    <div class="row" id="CompanyDropData">
+                        <div class="col-md-4 col-sm-4"><input class="form-control" type="text" id="searchCompany" placeholder="Search" style="margin-left:-5px; margin-bottom:10px"></div>
+                        <div class="col-md-8 col-sm-8"></div>
+                        <div class="col col-md-4 col-sm-4 list-group" id="CompanyList" style="overflow-y:scroll; max-height:300px">
+                            
+                            @foreach (var row in Model.companyaddressList)
+                            {
+                                <a class="list-group-item" id=@row.Company.CompanyId onclick="ShowData(@row.Company.CompanyId)">@Html.DisplayFor(a => row.Company.Company1)</a>
+                            }
+                        </div>
+                        <div class="col col-md-8 col-sm-8">
+                            <div class="container" id="DataShow"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region "DBDropdown" -->
+                <a class="col-md-12 col-sm-12 btn text-left" id="DBDrop" type="button" style="background-color:#008081;font-size:16px;font-weight:400;margin-top:20px;">
+                    <i class="fas fa-database"></i> Database ☰
+                </a>
+                <div class="col col-md-12 col-sm-12" id="DBDropMenu" style="display:none;margin-left:10px;">
+                    <div class="row" id="DBDropData">
+                        <div class="col-md-4 col-sm-4"><input class="form-control" type="text" id="searchDB" placeholder="Search" style="margin-left:-5px; margin-bottom:10px"></div>
+                        <div class="col-md-8 col-sm-8"></div>
+                        <div class="col col-md-4 col-sm-4 list-group" id="DBList" style="overflow-y:scroll; max-height:300px">
+                            @foreach (var row in Model.companydbList)
+                            {
+                                <a class="list-group-item" id=@row.CompanyDBId onclick="ShowDBData(@row.CompanyDBId)">@Html.DisplayFor(a => row.DatabaseInfo.ServerName)</a>
+                            }
+                        </div>
+                        <div class="col col-md-8 col-sm-8">
+                            <div class="container" id="DBDataShow"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region "UserDropdown" -->
+                <a class="col-md-12 col-sm-12 btn text-left" id="UserDrop" type="button" style="background-color:#4C516D;font-size:16px;font-weight:400;margin-top:20px">
+                    <i class="fas fa-user-alt"></i> User ☰
+                </a>
+                <div class="col col-md-12 col-sm-12" id="UserDropMenu" style="display:none;margin-left:10px;">
+                    <div class="row" id="UserDropData">
+                        <div class="col-md-4 col-sm-4"><input class="form-control" type="text" id="searchUser" placeholder="Search" style="margin-left:-5px; margin-bottom:10px"></div>
+                        <div class="col-md-8 col-sm-8"></div>
+                        <div class="col col-md-4 col-sm-4 list-group" id="UserList" style="overflow-y:scroll; max-height:300px">
+                            @foreach (var row in Model.useraddressList)
+                            {
+                                <a class="list-group-item" id=@row.UserAddressId onclick="ShowUserData(@row.UserAddressId)">@Html.DisplayFor(a => row.User.FirstName) @Html.DisplayFor(a => row.User.MiddleName) @Html.DisplayFor(a => row.User.LastName) </a>
+                            }
+                        </div>
+                        <div class="col col-md-8 col-sm-8">
+                            <div class="container" id="UserDataShow"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #endregion -->
+            </div>
+        </div>
+    </div>
+</div>
+<!--#endregion-->
+
+
+<!--#endregion-->         
+
+<!--#region "Scripts"-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function ShowData(id) {
+        $.ajax({
+            url: '@Url.Action("CompanyDBListByCompanyIdInJson", "Home")',
+            type: 'Post',
+            data: { CompanyId: id },
+            success: function (data) {
+                
+                var html = "<table class='table table-hover table-bordered'><thead><tr><th>Server</th><th>Authentication</th><th>UserName</th></tr></thead><tbody>";
+                $.each(data,function(index,value){
+                    html += "<tr><td>" + value.DatabaseInfo.ServerName + "</td><td>" + value.DatabaseInfo.Authentication + "</td><td>" + value.DatabaseInfo.UserName + "</td></tr>";
+                });
+                
+                html += "</tbody></table>";
+
+                $("#DataShow").html(html);
+            },
+            error: function () {
+                $("#DataShow").html("No Data Found");
+                console.log("Error Occoured");
+            }
+        });
+    }
+
+    function ShowDBData(id) {
+        $.ajax({
+            url: '@Url.Action("CompanyDBInfoByIdInJson", "Home")',
+            type: 'Post',
+            data: { CompanyDBId: id },
+            success: function (data) {
+                
+                var html = "<table class='table table-hover table-bordered'><thead><tr><th>Company</th><th>Authentication</th><th>UserName</th></tr></thead><tbody>";
+                
+                    html += "<tr><td>" + data.Company.Company1 + "</td><td>" + data.DatabaseInfo.Authentication + "</td><td>" + data.DatabaseInfo.UserName + "</td></tr>";
+                
+
+                html += "</tbody></table>";
+
+                $("#DBDataShow").html(html);
+            },
+            error: function () {
+                $("#DBDataShow").html("No Data Found");
+                console.log("Error Occoured");
+            }
+        });
+    }
+
+
+    function ShowUserData(id) {
+        $.ajax({
+            url: '@Url.Action("UserAddressInfoByIdInJson", "Home")',
+            type: 'Post',
+            data: { UserAddressId: id },
+            success: function (data) {
+                
+                var html = "<table class='table table-hover table-bordered'><thead><tr><th>Role</th><th>Address</th><th>City</th><th>State,Country</th></tr></thead><tbody>";
+
+                html += "<tr><td>" + data.User.Role.Role1 + "</td><td>" + data.Address.Address1+", "+data.Address.Address2+ "</td><td>" + data.Address.City + "</td><td>"+data.Address.State.State1+", "+data.Address.State.Country.Country1+"</td></tr>";
+                html += "</tbody></table>";
+
+                $("#UserDataShow").html(html);
+            },
+            error: function () {
+                $("#UserDataShow").html("No Data Found");
+                console.log("Error Occoured");
+            }
+        });
+    }
+
+</script>
+
+<script type="text/javascript">
+    $("#CompanyDrop").click(function () {
+        if ($("#CompanyDropMenu:visible").length == 0) {
+            $("#CompanyDropMenu").slideDown();
+        }
+        else {
+            $("#CompanyDropMenu").slideUp();
+        }
+    });
+    $("#DBDrop").click(function () {
+        if ($("#DBDropMenu:visible").length == 0) {
+            $("#DBDropMenu").slideDown();
+        }
+        else {
+            $("#DBDropMenu").slideUp();
+        }
+    });
+    $("#UserDrop").click(function () {
+        if ($("#UserDropMenu:visible").length == 0) {
+            $("#UserDropMenu").slideDown();
+        }
+        else {
+            $("#UserDropMenu").slideUp();
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#searchCompany").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#CompanyList a").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("#searchDB").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#DBList a").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("#searchUser").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#UserList a").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+<!--#endregion-->
+

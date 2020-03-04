@@ -1,0 +1,200 @@
+﻿@model CompanyDBWeb.Models.CompanyDBDataModel
+@{
+    ViewBag.Title = "CompanyDBList";
+}
+
+<!--#region "CSS"-->
+<style>
+    .table thead tr th {
+        font-weight: 700;
+    }
+</style>
+<!--#endregion-->
+
+<!--#region "NavBar"-->
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:white ">
+    <a class="navbar-brand" href="@Url.Action("HomePage","Home")" style="font-weight:700;">Home</a>
+    <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("CompanyDetailList","Home")">Company</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("CompanyDBList","Home")">DB Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("UserList","Home")">Users</a>
+                </li>
+            </ul>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav-item" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" style="color:black">
+                    @Session["UserName"] (Admin)<img src="~/Home/RetrieveUserProfileImage/@Session["AdminId"]" alt="NO-DATA" style="border-radius:50%; height:30px; width:30px" />
+                    <img class="profile-img img-rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQFGxEA_sP1TrD6MGIDHAza-VAP1qYdB46ERfTxnd7vTJ9ey0Us" style="width:30px; height:30px;" />
+                </a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="@Url.Action("Index","Home")" style="font-weight:500; padding:0 10px 0 20px">Logout</a>
+                </div>
+            </div>
+            <!-- Links -->
+        </div>
+    <!-- Collapsible content -->
+</nav>
+<!--/.Navbar-->
+<!--#endregion-->
+
+<!--#region "Modal Button"-->
+<div class="container" style="margin-top:20px; margin-bottom:10px">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 text-right">
+            <button class="btn btn-info" type="button" id="btnDBModal">Add Database</button>
+        </div>
+    </div>
+</div>
+<!--#endregion-->
+
+<!--#region "Modal Form"-->
+@using (@Html.BeginForm("CompanyDBList", "Home", FormMethod.Post))
+{
+    <div class="modal fade" id="DBModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLongTitle" style="font-weight:800">Database</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div style="width: 100%;  margin-top: 20px;font-size: 16px" class="container">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 text-left">
+                                <label style="font-weight:700">Company</label>
+                            </div>
+                            <div class="col-sm-8 col-md-8">
+                                @Html.DropDownListFor(a => a.companydbDTO.FkCompanyId, new SelectList(Model.companyList, "CompanyID", "Company1"), "--Company--", new { @class = "form-control mb-4", @required = true })
+                            </div>
+                            <div class="col-md-4 col-sm-4 text-left">
+                                <label style="font-weight:700">Server</label>
+                            </div>
+                            <div class="col-sm-8 col-md-8">
+                                @Html.TextBoxFor(a => a.companydbDTO.DatabaseInfo.ServerName, new { @class = "form-control mb-4", @required = true })
+                            </div>
+                            <div class="col-md-4 col-sm-4 text-left">
+                                <label style="font-weight:700">Authentication</label>
+                            </div>
+                            <div class="col-sm-8 col-md-8">
+                                @Html.TextBoxFor(a => a.companydbDTO.DatabaseInfo.Authentication, new { @class = "form-control mb-4", @required = true })
+                            </div>
+                            <div class="col-md-4 col-sm-4 text-left">
+                                <label style="font-weight:700">Username</label>
+                            </div>
+                            <div class="col-sm-8 col-md-8">
+                                @Html.TextBoxFor(a => a.companydbDTO.DatabaseInfo.UserName, new { @class = "form-control mb-4", @required = true })
+                            </div>
+                            <div class="col-md-4 col-sm-4 text-left">
+                                <label style="font-weight:700">Password</label>
+                            </div>
+                            <div class="col-sm-8 col-md-8">
+                                @Html.TextBoxFor(a => a.companydbDTO.DatabaseInfo.Password, new { @class = "form-control mb-4", @required = true })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnHideDBModal">Close</button>
+                    <input type="submit" class="btn btn-success" value="Add" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--#endregion-->
+
+<!--#region "Table"-->
+<div class="container">
+    <div class="col-md-4 col-sm-4"><input class="form-control" type="text" id="searchDB" placeholder="Search" style="margin-bottom:10px"></div>
+    <div class="col-md-8 col-sm-8"></div>
+    <div class="col-md-12 col-sm-12" style="overflow-y:scroll; max-height:500px">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Company Code</th>
+                    <th>Server</th>
+                    <th>Authentication</th>
+                    <th>UserName</th>
+                </tr>
+            </thead>
+            <tbody id="DBTable">
+                @foreach (var row in Model.companydbList)
+                {
+                    if (@row.Active == true)
+                    {
+                        <tr ondblclick="rowSelectFunc(@row.CompanyDBId)" style="cursor:pointer;">
+                            <td>@Html.DisplayFor(a => row.Company.Company1)</td>
+                            <td>@Html.DisplayFor(a => row.Company.CompanyCode)</td>
+                            <td>@Html.DisplayFor(a => row.DatabaseInfo.ServerName)</td>
+                            <td>@Html.DisplayFor(a => row.DatabaseInfo.Authentication)</td>
+                            <td>@Html.DisplayFor(a => row.DatabaseInfo.UserName)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--#endregion-->
+
+<!--#region "Script"-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<!--#region "Showing Data when a row of the table is clicked"-->
+<script>
+    function rowSelectFunc(s) {
+        location.href = "@Url.Action("CompanyDBInfoById", "Home")" + "/" + s;
+    }
+</script>
+<!--#endregion-->
+
+<!--#region "Show Modal"-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnDBModal").click(function () {
+            $("#DBModal").modal('show');
+        });
+        $("#btnHideDBModal").click(function () {
+            $("#DBModal").modal('hide');
+        });
+    });
+</script>
+<!--#endregion-->
+
+<!--#region "Search function"-->
+<script>
+    $(document).ready(function () {
+        $("#searchDB").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#DBTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+<!--#endregion-->
+
+<!--#endregion-->
