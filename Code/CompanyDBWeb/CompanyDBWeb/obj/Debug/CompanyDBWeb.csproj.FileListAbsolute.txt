@@ -4,10 +4,13 @@ C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bi
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\Antlr3.Runtime.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\BLL.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\DTOs.dll
+C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\EntityFramework.SqlServer.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\Newtonsoft.Json.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Net.Http.Formatting.dll
+C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Cors.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Helpers.dll
+C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Http.Cors.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Http.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Http.WebHost.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Mvc.dll
@@ -23,6 +26,7 @@ C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bi
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\DTOs.pdb
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Net.Http.Formatting.xml
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Http.xml
+C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Http.Cors.xml
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Http.WebHost.xml
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Helpers.xml
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\System.Web.Mvc.xml
@@ -34,10 +38,6 @@ C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bi
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\Antlr3.Runtime.pdb
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\Newtonsoft.Json.xml
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\DAL.pdb
-C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\obj\Debug\CompanyDBWeb.csprojResolveAssemblyReference.cache
-C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\obj\Debug\CompanyDBWeb.dll
-C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\obj\Debug\CompanyDBWeb.pdb
-C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\EntityFramework.SqlServer.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\de\EntityFramework.SqlServer.resources.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\es\EntityFramework.SqlServer.resources.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\fr\EntityFramework.SqlServer.resources.dll
@@ -56,3 +56,6 @@ C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bi
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\ru\EntityFramework.resources.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\zh-Hans\EntityFramework.resources.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\bin\zh-Hant\EntityFramework.resources.dll
+C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\obj\Debug\CompanyDBWeb.csprojResolveAssemblyReference.cache
+C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\obj\Debug\CompanyDBWeb.dll
+C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\CompanyDBWeb\obj\Debug\CompanyDBWeb.pdb

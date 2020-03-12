@@ -30,20 +30,20 @@ namespace CompanyDBWeb.Controllers
                 using(var client=new HttpClient())
                 {
                     //CompanyList
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/CompanyList");
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.GetAsync("api/Company/CompanyList");
                     if (response.IsSuccessStatusCode)
                     {
                         model.companyaddressList = response.Content.ReadAsAsync<List<CompanyAddressDTO>>().Result;
                     }
                     //DBList
-                    HttpResponseMessage response2 = await client.GetAsync("api/CompanyDBMap/CompanyDBList");
+                    HttpResponseMessage response2 = await client.GetAsync("api/CompanyDB/CompanyDBList");
                     if (response2.IsSuccessStatusCode)
                     {
                         model.companydbList = response2.Content.ReadAsAsync<List<CompanyDBDTO>>().Result;
                     }
                     //UserList
-                    HttpResponseMessage response3 = await client.GetAsync("api/CompanyDBMap/UserList");
+                    HttpResponseMessage response3 = await client.GetAsync("api/User/UserList");
                     if (response3.IsSuccessStatusCode)
                     {
                         model.useraddressList = response3.Content.ReadAsAsync<List<UserAddressDTO>>().Result;
@@ -68,8 +68,8 @@ namespace CompanyDBWeb.Controllers
             List<CompanyDBDTO> list2 = new List<CompanyDBDTO>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:50297/");
-                HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/CompanyDBListByCompanyId/?CompanyId=" + CompanyId);
+                client.BaseAddress = new Uri("http://localhost:49750/");
+                HttpResponseMessage response = await client.GetAsync("api/CompanyDB/CompanyDBListByCompanyId/?CompanyId=" + CompanyId);
                 if (response.IsSuccessStatusCode)
                 {
                     list2 = response.Content.ReadAsAsync<List<CompanyDBDTO>>().Result;
@@ -90,8 +90,8 @@ namespace CompanyDBWeb.Controllers
             CompanyDBDTO CompanyDBDTOobject = new CompanyDBDTO();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:50297/");
-                HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/CompanyDBDataById/?CompanyDBId=" + CompanyDBId);
+                client.BaseAddress = new Uri("http://localhost:49750/");
+                HttpResponseMessage response = await client.GetAsync("api/CompanyDB/CompanyDBDataById/?CompanyDBId=" + CompanyDBId);
                 if (response.IsSuccessStatusCode)
                 {
                     CompanyDBDTOobject = response.Content.ReadAsAsync<CompanyDBDTO>().Result;
@@ -111,8 +111,8 @@ namespace CompanyDBWeb.Controllers
             UserAddressDTO UserAddressDTOobject = new UserAddressDTO();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:50297/");
-                HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/UserDataById/?UserAddressId=" + UserAddressId);
+                client.BaseAddress = new Uri("http://localhost:49750/");
+                HttpResponseMessage response = await client.GetAsync("api/User/UserDataById/?UserAddressId=" + UserAddressId);
                 if (response.IsSuccessStatusCode)
                 {
                     UserAddressDTOobject = response.Content.ReadAsAsync<UserAddressDTO>().Result;
@@ -154,14 +154,14 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/CheckLoginData/?UserName=" + model.loginDTO.Username + "&Password=" + model.loginDTO.Password);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.GetAsync("api/Login/CheckLoginData/?UserName=" + model.loginDTO.Username + "&Password=" + model.loginDTO.Password);
                     if (response.IsSuccessStatusCode)
                     {
                         UserId = response.Content.ReadAsAsync<int>().Result;
                         if (UserId > 0)
                         {
-                            HttpResponseMessage response2 = await client.GetAsync("api/CompanyDBMap/GetUserByUserId/?UserId=" + UserId);
+                            HttpResponseMessage response2 = await client.GetAsync("api/User/GetUserByUserId/?UserId=" + UserId);
                             if (response2.IsSuccessStatusCode)
                             {
                                 UserDTOobject = response2.Content.ReadAsAsync<UserDTO>().Result;
@@ -201,15 +201,15 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
+                    client.BaseAddress = new Uri("http://localhost:49750/");
                     //getting CountryList
-                    HttpResponseMessage response3 = await client.GetAsync("api/CompanyDBMap/CountryList");
+                    HttpResponseMessage response3 = await client.GetAsync("api/StateCountry/CountryList");
                     if (response3.IsSuccessStatusCode)
                     {
                         model.countryList = response3.Content.ReadAsAsync<List<CountryDTO>>().Result;
                     }
                     //getting StateList
-                    HttpResponseMessage response4 = await client.GetAsync("api/CompanyDBMap/StateList");
+                    HttpResponseMessage response4 = await client.GetAsync("api/StateCountry/StateList");
                     if (response4.IsSuccessStatusCode)
                     {
                         model.stateList = response4.Content.ReadAsAsync<List<StateDTO>>().Result;
@@ -242,8 +242,8 @@ namespace CompanyDBWeb.Controllers
                 model.useraddressDTO.User.UserProfilePicture = imgBytes;
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDBMap/CreateUser", model);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/User/CreateUser", model);
                     if (response.IsSuccessStatusCode)
                     {
                         return RedirectToAction("Index", "Home");
@@ -274,23 +274,23 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
+                    client.BaseAddress = new Uri("http://localhost:49750/");
                     //getting CompanyList
-                    HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/CompanyList");
+                    HttpResponseMessage response = await client.GetAsync("api/Company/CompanyList");
                     if (response.IsSuccessStatusCode)
                     {
                         model.companyaddressList = response.Content.ReadAsAsync<List<CompanyAddressDTO>>().Result;
                     }
 
                     //getting CountryList
-                    HttpResponseMessage response2 = await client.GetAsync("api/CompanyDBMap/CountryList");
+                    HttpResponseMessage response2 = await client.GetAsync("api/StateCountry/CountryList");
                     if (response2.IsSuccessStatusCode)
                     {
                         model.countryList = response2.Content.ReadAsAsync<List<CountryDTO>>().Result;
                     }
 
                     //getting StateList
-                    HttpResponseMessage response3 = await client.GetAsync("api/CompanyDBMap/StateList");
+                    HttpResponseMessage response3 = await client.GetAsync("api/StateCountry/StateList");
                     if (response3.IsSuccessStatusCode)
                     {
                         model.stateList = response3.Content.ReadAsAsync<List<StateDTO>>().Result;
@@ -317,8 +317,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDBMap/CreateCompany", model.companyaddressDTO);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/Company/CreateCompany", model.companyaddressDTO);
                     if (response.IsSuccessStatusCode)
                     {
                         return RedirectToAction("CompanyDetailList", "Home");
@@ -346,8 +346,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/CompanyDataById/?CompanyId=" + id);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.GetAsync("api/Company/CompanyDataById/?CompanyId=" + id);
                     if (response.IsSuccessStatusCode)
                     {
                         model.companyaddressDTO = response.Content.ReadAsAsync<CompanyAddressDTO>().Result;
@@ -374,8 +374,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDBMap/UpdateCompanyInfo", model.companyaddressDTO);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/Company/UpdateCompanyInfo", model.companyaddressDTO);
                     if (response.IsSuccessStatusCode)
                     {
                         return RedirectToAction("CompanyDetailList", "Home");
@@ -401,8 +401,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDBMap/DeleteCompany", model.companyaddressDTO);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/Company/DeleteCompany", model.companyaddressDTO);
                     if (response.IsSuccessStatusCode)
                     {
                         return RedirectToAction("CompanyDetailList", "Home");
@@ -434,13 +434,13 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/CompanyDBList");
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.GetAsync("api/CompanyDB/CompanyDBList");
                     if (response.IsSuccessStatusCode)
                     {
                         model.companydbList = response.Content.ReadAsAsync<List<CompanyDBDTO>>().Result;
                     }
-                    HttpResponseMessage response2 = await client.GetAsync("api/CompanyDBMap/ActiveCompanyList");
+                    HttpResponseMessage response2 = await client.GetAsync("api/Company/ActiveCompanyList");
                     if(response2.IsSuccessStatusCode)
                     {
                         model.companyList = response2.Content.ReadAsAsync<List<CompanyDTO>>().Result;
@@ -467,8 +467,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDBMap/CreateCompanyDB", model.companydbDTO);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDB/CreateCompanyDB", model.companydbDTO);
                     if (response.IsSuccessStatusCode)
                     {
                         return RedirectToAction("CompanyDBList", "Home");
@@ -495,8 +495,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/CompanyDBDataById/?CompanyDBId=" + id);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.GetAsync("api/CompanyDB/CompanyDBDataById/?CompanyDBId=" + id);
                     if (response.IsSuccessStatusCode)
                     {
                         model.companydbDTO = response.Content.ReadAsAsync<CompanyDBDTO>().Result;
@@ -523,8 +523,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDBMap/UpdateCompanyDBInfo", model.companydbDTO);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDB/UpdateCompanyDBInfo", model.companydbDTO);
                     if (response.IsSuccessStatusCode)
                     {
                         return RedirectToAction("CompanyDBList", "Home");
@@ -550,8 +550,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDBMap/DeleteCompanyDB", model.companydbDTO);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDB/DeleteCompanyDB", model.companydbDTO);
                     if (response.IsSuccessStatusCode)
                     {
                         return RedirectToAction("CompanyDBList", "Home");
@@ -582,27 +582,27 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client =new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
+                    client.BaseAddress = new Uri("http://localhost:49750/");
                     //getting UserList
-                    HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/UserList");
+                    HttpResponseMessage response = await client.GetAsync("api/User/UserList");
                     if(response.IsSuccessStatusCode)
                     {
                         model.useraddressList = response.Content.ReadAsAsync<List<UserAddressDTO>>().Result;
                     }
                     //getting RoleList
-                    HttpResponseMessage response2 = await client.GetAsync("api/CompanyDBMap/RoleList");
+                    HttpResponseMessage response2 = await client.GetAsync("api/Role/RoleList");
                     if (response2.IsSuccessStatusCode)
                     {
                         model.roleList = response2.Content.ReadAsAsync<List<RoleDTO>>().Result;
                     }
                     //getting CountryList
-                    HttpResponseMessage response3 = await client.GetAsync("api/CompanyDBMap/CountryList");
+                    HttpResponseMessage response3 = await client.GetAsync("api/StateCountry/CountryList");
                     if (response3.IsSuccessStatusCode)
                     {
                         model.countryList = response3.Content.ReadAsAsync<List<CountryDTO>>().Result;
                     }
                     //getting StateList
-                    HttpResponseMessage response4 = await client.GetAsync("api/CompanyDBMap/StateList");
+                    HttpResponseMessage response4 = await client.GetAsync("api/StateCountry/StateList");
                     if (response4.IsSuccessStatusCode)
                     {
                         model.stateList = response4.Content.ReadAsAsync<List<StateDTO>>().Result;
@@ -635,8 +635,8 @@ namespace CompanyDBWeb.Controllers
                 model.useraddressDTO.User.UserProfilePicture = imgBytes;
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDBMap/CreateUser", model);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/User/CreateUser", model);
                     if (response.IsSuccessStatusCode)
                     {
                         return RedirectToAction("UserList", "Home");
@@ -663,8 +663,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/UserDataById/?UserAddressId=" + id);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.GetAsync("api/User/UserDataById/?UserAddressId=" + id);
                     if (response.IsSuccessStatusCode)
                     {
                         model.useraddressDTO = response.Content.ReadAsAsync<UserAddressDTO>().Result;
@@ -691,8 +691,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDBMap/UpdateUserInfo", model.useraddressDTO);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/User/UpdateUserInfo", model.useraddressDTO);
                     if (response.IsSuccessStatusCode)
                     {
                         return RedirectToAction("UserList", "Home");
@@ -718,8 +718,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/CompanyDBMap/DeleteUser", model.useraddressDTO);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/User/DeleteUser", model.useraddressDTO);
                     if (response.IsSuccessStatusCode)
                     {
                         return RedirectToAction("UserList", "Home");
@@ -745,8 +745,8 @@ namespace CompanyDBWeb.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:50297/");
-                    HttpResponseMessage response = await client.GetAsync("api/CompanyDBMap/GetUserByUserId/?UserId=" + id);
+                    client.BaseAddress = new Uri("http://localhost:49750/");
+                    HttpResponseMessage response = await client.GetAsync("api/User/GetUserByUserId/?UserId=" + id);
                     if (response.IsSuccessStatusCode)
                     {
                         UserDTOobject = response.Content.ReadAsAsync<UserDTO>().Result;
@@ -787,9 +787,9 @@ namespace CompanyDBWeb.Controllers
             
             using (var client =new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:50297/");
+                client.BaseAddress = new Uri("http://localhost:49750/");
                 //getting StateList
-                HttpResponseMessage response4 = await client.GetAsync("api/CompanyDBMap/StateListByCountryId/?CountryId=" + id);
+                HttpResponseMessage response4 = await client.GetAsync("api/StateCountry/StateListByCountryId/?CountryId=" + id);
                 if (response4.IsSuccessStatusCode)
                 {
                     stateList = response4.Content.ReadAsAsync<List<StateDTO>>().Result;

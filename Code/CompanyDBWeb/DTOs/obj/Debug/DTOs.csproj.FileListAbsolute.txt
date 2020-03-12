@@ -1,5 +1,4 @@
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\DTOs\bin\Debug\DTOs.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\DTOs\bin\Debug\DTOs.pdb
-C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\DTOs\obj\Debug\DTOs.csprojResolveAssemblyReference.cache
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\DTOs\obj\Debug\DTOs.dll
 C:\Users\Mayank Taliwal\visual studio 2013\Projects\CompanyDBWeb\DTOs\obj\Debug\DTOs.pdb
